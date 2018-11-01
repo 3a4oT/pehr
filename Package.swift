@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "envStatus",
+    name: "pehf",
     dependencies: [
         // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "3.1.0")),
