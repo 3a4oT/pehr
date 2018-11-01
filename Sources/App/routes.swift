@@ -2,19 +2,16 @@ import Vapor
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
-    // Basic "It works" example
-    router.get { req in
-        return "It works!"
-    }
+    let landingController = LandingController()
+    let slackAuthController = SlackAuthController()
+    let reportController = ReportController()
     
-    // Basic "Hello, world!" example
-    router.get("hello") { req in
-        return "Hello, world!"
+    router.get("", use: landingController.index)
+    router.group("report") { subRouter in
+        subRouter.get("/", use: reportController.index)
+        subRouter.post("/status", use: reportController.report)
     }
-
-    // Example of configuring a controller
-    let todoController = TodoController()
-    router.get("todos", use: todoController.index)
-    router.post("todos", use: todoController.create)
-    router.delete("todos", Todo.parameter, use: todoController.delete)
+    router.group("slack") { (subRouter) in
+        subRouter.get("/oauth/authorize", use: slackAuthController.oauthAuthorize)
+    }
 }

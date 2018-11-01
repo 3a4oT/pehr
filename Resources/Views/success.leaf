@@ -1,0 +1,5 @@
+<html>
+<body>
+<p>EnvHealth was successfully added to <b>#(teamName) -> #(webHook.channel)</b></p>
+</body>
+</html>
